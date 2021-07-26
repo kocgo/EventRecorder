@@ -51,7 +51,7 @@ export default class EventRecorder {
     // we explicitly catch any errors and swallow them, as none node-type events are also ingested.
     // for these events we cannot generate selectors, which is OK
     try {
-      this._eventLog.push({
+      const eventObject = {
         selector: this._getSelector(e),
         value: e.target.value,
         tagName: e.target.tagName,
@@ -59,7 +59,11 @@ export default class EventRecorder {
         keyCode: e.keyCode ? e.keyCode : null,
         href: e.target.href ? e.target.href : null,
         coordinates: EventRecorder._getCoordinates(e)
-      })
+      }
+
+      this._eventLog.push(eventObject)
+      console.log(eventObject)
+
     } catch (e) {}
   }
 
